@@ -1,0 +1,22 @@
+{
+    "name": "postgres_worker_1_source",
+    "config": {
+        "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+        "database.server.name": "test",
+        "database.hostname": "postgres_worker_1",
+        "database.port": "5432",
+        "database.user": "test",
+        "database.dbname": "test",
+        "database.password": "test",
+        "plugin.name": "pgoutput",
+        "publication.autocreate.mode": "disabled",
+        "publication.name": "test_publication",
+        "slot.name": "test_slot",
+        "transforms": "Reroute",
+        "transforms.Reroute.type": "io.debezium.transforms.ByLogicalTableRouter",
+        "transforms.Reroute.topic.regex": "test.public.table_1_[0-9]{6}",
+        "transforms.Reroute.topic.replacement": "table_1",
+	"topic.creation.default.replication.factor": 2,
+	"topic.creation.default.partitions": 2
+    }
+}
